@@ -8,6 +8,6 @@ module.exports = function(application){
 		application.app.controllers.cadastro.cadastrar(application, req, res);
 	});
 
-	
+
 
 }

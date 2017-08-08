@@ -13,6 +13,13 @@
 
 		<!-- incluindo css -->
 		<link href="css/style.css" rel="stylesheet">
+		<script>
+					$(document).ready(function(){
+							$("#cadastro").click(function(){
+									window.location.href = "/cadastro";
+							});
+					});
+		</script>
 
 	</head>
 
@@ -26,7 +33,7 @@
 						<input type="text" value="<%=dadosForm.usuario%>" name="usuario" id="usuario" placeholder="Usuário" class="form-control" autocomplete="off" />
 						<input type="password" value="<%=dadosForm.senha%>" name="senha" id="senha" placeholder="Senha" class="form-control" />
 						<button type="submit" class="btn btn-success">Entrar</button>
-						<button type="button" class="btn btn-info">Cadastro</button>
+						<button type="button" id="cadastro" class="btn btn-info">Cadastro</button>
 					</div>
 				</form>
 

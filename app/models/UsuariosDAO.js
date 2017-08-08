@@ -1,3 +1,6 @@
+/* Importar o modulo do crypto */
+var crypto = require("crypto");
+
 // Definição da classe
 function UsuariosDAO(connection){
     // variavel so dentro do contexto da função
@@ -8,6 +11,10 @@ UsuariosDAO.prototype.inserirUsuario = function(usuario){
     // Abre a conexão com o banco de dados
     this._connection.open(function(err, mongoclient){
         mongoclient.collection("usuarios", function(err, collection){
+            // criptografa a senha do usuário.
+            var senha_criptografada = crypto.createHash("md5").update(usuario.senha).digest("hex");
+            // sobreescreve a senha do usuário
+            usuario.senha = senha_criptografada;
             // Insere os dados do usuário no banco de dados
             collection.insert(usuario);
             // Encerra conexão com o banco de dados
@@ -20,6 +27,10 @@ UsuariosDAO.prototype.autenticar = function(usuario, req, res){
     // Abre a conexão com o banco de dados
     this._connection.open(function(err, mongoclient){
         mongoclient.collection("usuarios", function(err, collection){
+            // criptografa a senha do usuário.
+            var senha_criptografada = crypto.createHash("md5").update(usuario.senha).digest("hex");
+            // sobreescreve a senha do usuário
+            usuario.senha = senha_criptografada;
             // consulta os usuário no banco de dados
             collection.find({
                 usuario: usuario.usuario,
